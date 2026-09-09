@@ -31,7 +31,14 @@ ThreadItem.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
-    authorName: PropTypes.string,
-    commentCount: PropTypes.number,
+
+    author: PropTypes.shape({
+      name: PropTypes.string,
+      avatarUrl: PropTypes.string,
+    }),
+
+    _count: PropTypes.shape({
+      comments: PropTypes.number,
+    }),
   }).isRequired,
 };
