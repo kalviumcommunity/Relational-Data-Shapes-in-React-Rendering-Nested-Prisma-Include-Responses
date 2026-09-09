@@ -10,18 +10,18 @@ export default function ThreadItem({ thread }) {
   return (
     <li className="thread">
       <div className="thread-top">
-        <img className="avatar" src="/placeholder-avatar.svg" alt="placeholder" />
+        <img className="avatar" src={thread.author?.avatarUrl|| "/placeholder-avatar.svg"} alt="placeholder" />
 
         <div className="thread-main">
           <h3>{thread.title}</h3>
-          <p className="meta">by {thread.authorName}</p>
+          <p className="meta">by {thread.author?.name|| "Anonymous" }</p>
         </div>
 
-        <span className="badge">{thread.commentCount} replies</span>
+        <span className="badge">{thread._count?.comments??0} replies</span>
       </div>
 
       <p>{thread.body}</p>
-      <p className="todo">TODO: Replace flat author fields with nested relation paths.</p>
+      
     </li>
   );
 }
@@ -31,7 +31,14 @@ ThreadItem.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
-    authorName: PropTypes.string,
-    commentCount: PropTypes.number,
+
+    author: PropTypes.shape({
+      name: PropTypes.string,
+      avatarUrl: PropTypes.string,
+    }),
+
+    _count: PropTypes.shape({
+      comments: PropTypes.number,
+    }),
   }).isRequired,
 };
