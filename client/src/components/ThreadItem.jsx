@@ -7,21 +7,23 @@ import PropTypes from "prop-types";
 //   thread._count?.comments
 // Also add fallback UI so author-less seeded rows do not crash.
 export default function ThreadItem({ thread }) {
+  const authorName = thread.author?.name || "Anonymous";
+  const avatarUrl = thread.author?.avatarUrl || "/placeholder-avatar.svg";
+  const commentCount = thread.author?.comments || 0;
   return (
     <li className="thread">
       <div className="thread-top">
-        <img className="avatar" src="/placeholder-avatar.svg" alt="placeholder" />
+        <img className="avatar" src={avatarUrl} alt="placeholder" />
 
         <div className="thread-main">
           <h3>{thread.title}</h3>
-          <p className="meta">by {thread.authorName}</p>
+          <p className="meta">by {authorName}</p>
         </div>
 
-        <span className="badge">{thread.commentCount} replies</span>
+        <span className="badge">{commentCount} replies</span>
       </div>
 
       <p>{thread.body}</p>
-      <p className="todo">TODO: Replace flat author fields with nested relation paths.</p>
     </li>
   );
 }
